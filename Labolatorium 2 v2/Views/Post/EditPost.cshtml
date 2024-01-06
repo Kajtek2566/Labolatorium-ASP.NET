@@ -1,0 +1,43 @@
+﻿@using Labolatorium_3_v2.Models
+@model Post
+
+<h2>Edit new post</h2>
+<form asp-action="EditPost" asp-controller="Post" method="post">
+    <div>
+        Post: 
+        <div>
+            <label asp-for="Content">Content</label>
+            <div>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Content"  value="@Model.Content"/>
+        </div>
+
+        <div>
+            <label asp-for="Autor">Autor</label>
+            <div>
+                <span asp-validation-for="Autor" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Autor" />
+        </div>
+
+        <div>
+            <label asp-for="Tags">Tags</label>
+            <div>
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Tags" />
+        </div>
+
+        <div>
+            <label asp-for="Comment">Comment</label>
+            <div>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Comment" />
+        </div>
+
+
+    </div>
+    <button type="Submit">Zapisz</button>
+</form>

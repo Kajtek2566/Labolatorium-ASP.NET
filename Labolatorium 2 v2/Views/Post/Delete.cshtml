@@ -1,0 +1,9 @@
+﻿@using Labolatorium_3_v2.Models
+@model Post
+
+<h2>Czy napewno chcesz usunąć post?</h2>
+<form asp-action="Delete" asp-controller="Post" method="post">
+<a asp-action="index" class="btn btn-danger">Nie</a>
+
+    <button type="Submit" class="btn">Tak</button>
+</form>

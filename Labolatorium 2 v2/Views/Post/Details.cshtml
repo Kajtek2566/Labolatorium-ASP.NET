@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Labolatorium_3_v2.Models
+@model Post
+
+<h2>Post details</h2>
+<form asp-action="Details" asp-controller="Post" method="post">
+    <div>
+        Post: 
+        <div>
+            <label asp-for="Content">Content</label>
+            <div>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Content"  value="@Model.Content" disabled/>
+        </div>
+
+        <div>
+            <label asp-for="Autor">Autor</label>
+            <div>
+                <span asp-validation-for="Autor" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Autor" disabled />
+        </div>
+
+        <div>
+            <label asp-for="Tags">Tags</label>
+            <div>
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Tags" disabled/>
+        </div>
+
+        <div>
+            <label asp-for="Comment">Comment</label>
+            <div>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Comment" disabled />
+        </div>
+
+
+    </div>
+    <button type="Submit">Powróć</button>
+</form>
