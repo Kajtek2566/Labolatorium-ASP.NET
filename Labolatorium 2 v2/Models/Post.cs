@@ -29,6 +29,9 @@ namespace Labolatorium_3_v2.Models
         [Display(Name = "Komentarz")]
         public string? Comment { get; set; }
 
+        [Display(Name = "Priorytet")]
+        public Priority Priority { get; set; }
+
 
     }
 }

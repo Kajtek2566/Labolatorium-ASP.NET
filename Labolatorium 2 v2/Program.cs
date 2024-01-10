@@ -1,4 +1,7 @@
-namespace Labolatorium_2_v2
+
+using Labolatorium_3_v2.Models;
+
+namespace Labolatorium_3_v2
 {
     public class Program
     {
@@ -8,6 +11,7 @@ namespace Labolatorium_2_v2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IPostService, MemoryPostService>();
 
             var app = builder.Build();
 

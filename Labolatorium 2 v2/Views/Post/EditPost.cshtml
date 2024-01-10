@@ -6,6 +6,13 @@
     <div>
         Post: 
         <div>
+            <label asp-for="Priority">Priority</label>
+            <div>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Priority" value="@Model.Priority" />
+        </div>
+        <div>
             <label asp-for="Content">Content</label>
             <div>
                 <span asp-validation-for="Content" class="text-danger"></span>

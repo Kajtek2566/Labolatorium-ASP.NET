@@ -16,7 +16,7 @@ namespace Labolatorium_3_v2.Controllers
         }
         public IActionResult Index()
         {
-            return View(_Posts);
+            return View(_Posts.Values.ToList());
         }
 
         [HttpPost]

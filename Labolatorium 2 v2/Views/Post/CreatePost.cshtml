@@ -4,6 +4,13 @@
 <form asp-action="Create" asp-controller="Post" method="post">
     <div>
         Post:
+        <div>
+            <label asp-for="Priority">Priority</label>
+            <div>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <input class="form-control" type="text" asp-for="Priority" />
+        </div>
         <div>
             <label asp-for="Content">Content</label>
             <div>
