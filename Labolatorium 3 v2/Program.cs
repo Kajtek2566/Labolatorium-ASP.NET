@@ -1,5 +1,6 @@
 
 using Labolatorium_3_v2.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Labolatorium_3_v2
 {
@@ -11,7 +12,8 @@ namespace Labolatorium_3_v2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IPostService, MemoryPostService>();
+            builder.Services.AddSingleton<IPostService, MemoryPostService>();         
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();
 

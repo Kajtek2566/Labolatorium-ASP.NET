@@ -57,7 +57,7 @@ namespace Labolatorium_3_v2.Controllers
             if (ModelState.IsValid)
             {
                 _Posts[posts.Id] = posts;
-                return View("Index", _Posts);
+                return RedirectToAction("Index", _Posts);
             }
             else
             {
@@ -83,7 +83,7 @@ namespace Labolatorium_3_v2.Controllers
         public IActionResult Details()
         {
 
-            return View("Index", _Posts);
+            return RedirectToAction("Index", _Posts);
         }
 
         [HttpGet]
@@ -104,7 +104,7 @@ namespace Labolatorium_3_v2.Controllers
         public IActionResult Delete(Post posts)
         {
             _Posts.Remove(posts.Id);
-            return View("Index", _Posts);
+            return RedirectToAction("Index", _Posts);
         }
 
 

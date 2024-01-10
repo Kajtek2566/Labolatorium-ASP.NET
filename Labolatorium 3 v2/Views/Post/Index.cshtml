@@ -6,7 +6,7 @@
     <table class="table">
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => model[0].Id)
+                @Html.DisplayNameFor(model => model[0].Priority)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model[0].Content)
@@ -23,15 +23,13 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model[0].Comment)
             </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model[0].Priorytet)
-            </th>
+            
         </tr>
-        @foreach (var (i, post) in @Model)
+        @foreach (var post in @Model)
         {
             <tr>
                 <td>
-                    @i
+                    @post.Priority.GetDisplayName()
                 </td>
                 <td>
                     @post.Content
@@ -48,9 +46,7 @@
                 <td>
                     @post.Comment
                 </td>
-                <td>
-                    @post.Priority.GetDisplayName()
-                </td>
+                
                 <td>
                     <a class="btn btn-primary"
                         asp-action="EditPost"
