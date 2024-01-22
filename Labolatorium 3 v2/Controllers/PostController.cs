@@ -7,7 +7,11 @@ namespace Labolatorium_3_v2.Controllers
     public class PostController : Controller
     {
 
-        static Dictionary<int, Post> _Posts = new Dictionary<int, Post>();
+        private readonly IPostService _postService;
+        public PostController (IPostService postService)
+        {
+            _postService = postService;
+        }
 
         [HttpGet]
         public IActionResult CreatePost()
@@ -16,7 +20,7 @@ namespace Labolatorium_3_v2.Controllers
         }
         public IActionResult Index()
         {
-            return View(_Posts.Values.ToList());
+            return View(_postService.FindAll());
         }
 
         [HttpPost]
@@ -24,30 +28,28 @@ namespace Labolatorium_3_v2.Controllers
         {
             if (ModelState.IsValid)
             {
-                int id = _Posts.Keys.Count != 0 ? _Posts.Keys.Max() : 0;
-                model.Id = id + 1;
-                _Posts.Add(model.Id, model);
+                _postService.Add(model);
 
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                return View();
             }
         }
 
         [HttpGet]
         public IActionResult EditPost(int id)
-        {
+        { 
 
-            if (_Posts.Keys.Contains(id))
+            if (_postService.FindById(id) is not null)
             {
-                return View(_Posts[id]);
+                return View(_postService.FindById(id));
             }
             else
             {
                 return NotFound();
-            };
+            }
         }
 
         [HttpPost]
@@ -56,22 +58,22 @@ namespace Labolatorium_3_v2.Controllers
 
             if (ModelState.IsValid)
             {
-                _Posts[posts.Id] = posts;
-                return RedirectToAction("Index", _Posts);
+                _postService.Update(posts);
+                return RedirectToAction("Index");
             }
             else
             {
                 return NotFound();
-            };
+            }
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
 
-            if (_Posts.Keys.Contains(id))
+            if (_postService.FindById(id) is not null)
             {
-                return View(_Posts[id]);
+                return View(_postService.FindById(id));
             }
             else
             {
@@ -82,17 +84,24 @@ namespace Labolatorium_3_v2.Controllers
         [HttpPost]
         public IActionResult Details()
         {
+            if(ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
 
-            return RedirectToAction("Index", _Posts);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
 
-            if (_Posts.Keys.Contains(id))
+            if (_postService.FindById(id) is not null)
             {
-                return View(_Posts[id]);
+                return View(_postService.FindById(id));
             }
             else
             {
@@ -103,8 +112,8 @@ namespace Labolatorium_3_v2.Controllers
         [HttpPost]
         public IActionResult Delete(Post posts)
         {
-            _Posts.Remove(posts.Id);
-            return RedirectToAction("Index", _Posts);
+            _postService.Delete(posts.Id);
+            return RedirectToAction("Index");
         }
 
 
