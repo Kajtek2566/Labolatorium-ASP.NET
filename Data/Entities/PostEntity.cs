@@ -19,6 +19,11 @@ public class PostEntity
         public string? Tags { get; set; }
         public string? Comment { get; set; }
         public int Priority { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
         
+        public UserEntity? User { get; set; }
+
     }
 }

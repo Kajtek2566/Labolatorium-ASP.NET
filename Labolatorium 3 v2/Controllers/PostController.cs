@@ -1,5 +1,6 @@
 ﻿using Labolatorium_3_v2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace Labolatorium_3_v2.Controllers
@@ -8,6 +9,7 @@ namespace Labolatorium_3_v2.Controllers
     {
 
         private readonly IPostService _postService;
+
         public PostController (IPostService postService)
         {
             _postService = postService;
@@ -16,7 +18,12 @@ namespace Labolatorium_3_v2.Controllers
         [HttpGet]
         public IActionResult CreatePost()
         {
-            return View();
+            Post model = new Post();
+            model.Users = _postService
+                .FindAllUsersForVieModel()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Login })
+                .ToList();
+            return View(model);
         }
         public IActionResult Index()
         {
@@ -115,15 +122,6 @@ namespace Labolatorium_3_v2.Controllers
             _postService.Delete(posts.Id);
             return RedirectToAction("Index");
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

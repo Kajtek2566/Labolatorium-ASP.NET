@@ -16,6 +16,7 @@ namespace Labolatorium_3_v2.Mappres
                 Tags = entity.Tags,
                 Comment = entity.Comment,
                 Priority = (Priority)entity.Priority,
+                UserId= entity.UserId,
             };
         }
 
@@ -30,6 +31,7 @@ namespace Labolatorium_3_v2.Mappres
                 Tags = model.Tags,
                 Comment = model.Comment,
                 Priority = (int)model.Priority,
+                UserId= model.UserId,
             };
         }
     }

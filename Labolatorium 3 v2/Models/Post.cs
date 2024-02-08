@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -31,6 +33,12 @@ namespace Labolatorium_3_v2.Models
 
         [Display(Name = "Priorytet")]
         public Priority Priority { get; set; }
+
+        [HiddenInput]
+        public int UserId { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> Users { get; set; }
 
 
     }

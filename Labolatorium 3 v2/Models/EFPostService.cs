@@ -38,6 +38,11 @@ namespace Labolatorium_3_v2.Models
             return _context.Posts.Select(e => PostMapper.FromEntity(e)).ToList(); ;
         }
 
+        public List<UserEntity> FindAllUsersForVieModel()
+        {
+            return _context.Users.ToList();
+        }
+
         public Post? FindById(int id)
         {
             return PostMapper.FromEntity(_context.Posts.Find(id));
@@ -48,5 +53,7 @@ namespace Labolatorium_3_v2.Models
             _context.Posts.Update(PostMapper.ToEntity(post));
             _context.SaveChanges();
         }
+
+        
     }
 }

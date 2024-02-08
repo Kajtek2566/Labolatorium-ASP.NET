@@ -1,4 +1,6 @@
-﻿namespace Labolatorium_3_v2.Models
+﻿using Data.Entities;
+
+namespace Labolatorium_3_v2.Models
 {
     public class MemoryPostService : IPostService
     {
@@ -26,6 +28,11 @@
         public List<Post> FindAll()
         {
             return _posts.Values.ToList();
+        }
+
+        public List<UserEntity> FindAllUsersForVieModel()
+        {
+            throw new NotImplementedException();
         }
 
         public Post? FindById(int id)
