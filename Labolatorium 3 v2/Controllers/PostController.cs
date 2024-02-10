@@ -28,7 +28,14 @@ namespace Labolatorium_3_v2.Controllers
                 .ToList();
             return View(model);
         }
+
+        [Authorize]
         public IActionResult Index()
+        {
+            return View(_postService.FindAll());
+        }
+
+        public IActionResult Tablica()
         {
             return View(_postService.FindAll());
         }

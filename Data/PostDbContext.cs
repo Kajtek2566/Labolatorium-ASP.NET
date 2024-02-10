@@ -58,7 +58,7 @@ namespace Data
             var admin = new IdentityUser
             {
                 Id = ADMIN_ID,
-                Email = "Kajetan.satch@wsei.edu.pl",
+                Email = "Kajetan.stach@wsei.edu.pl",
                 EmailConfirmed = true,
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",

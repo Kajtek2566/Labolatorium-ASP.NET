@@ -1,0 +1,53 @@
+﻿@model List<Post>
+
+<h2>Tablica Postów</h2>
+@if (Model.Count > 0)
+{
+ 
+    <table class="table">
+        <tr>
+            @*<th scope="col">
+        @Html.DisplayNameFor(model => model[0].Priority)
+        </th*@
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Content)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Autor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Publication_date)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Tags)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Comment)
+            </th>
+
+        </tr>
+        @foreach (var post in @Model)
+        {
+            <tr>
+                @*<td>
+        @post.Priority.GetDisplayName()
+        </td>*@
+                <td>
+                    @post.Content
+                </td>
+                <td>
+                    @post.Autor
+                </td>
+                <td>
+                    @post.Publication_date
+                </td>
+                <td>
+                    @post.Tags
+                </td>
+                <td>
+                    @post.Comment
+                </td>
+            </tr>
+        }
+    </table>
+}
