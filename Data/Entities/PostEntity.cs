@@ -15,7 +15,7 @@ public class PostEntity
         public int PostId { get; set; }
         public string? Content { get; set; }
         public string? Autor { get; set; }
-        public DateTime Publication_date { get; set; }
+        public DateTime? Publication_date { get; set; }
         public string? Tags { get; set; }
         public string? Comment { get; set; }
         public int Priority { get; set; }

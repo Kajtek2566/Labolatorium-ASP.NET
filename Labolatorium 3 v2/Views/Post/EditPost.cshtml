@@ -43,6 +43,10 @@
             </div>
             <input class="form-control" type="text" asp-for="Comment" />
         </div>
+        <div>
+            <label asp-for="Comment">Użtkownik</label>
+            <select class="form-control" asp-for="UserId" asp-items="@Model.Users"></select>
+        </div>
 
 
     </div>

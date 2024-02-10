@@ -21,7 +21,7 @@ namespace Labolatorium_3_v2.Models
 
         [HiddenInput]
         
-        public DateTime Publication_date { get; set; }
+        public DateTime? Publication_date { get; set; } = DateTime.Now;
 
        
         [Display(Name = "Tagi")]

@@ -3,6 +3,8 @@ using Labolatorium_3_v2.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using System.Xml.Linq;
 using Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Labolatorium_3_v2
 {
@@ -11,10 +13,21 @@ namespace Labolatorium_3_v2
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("PostDbContextConnection") ?? throw new InvalidOperationException("Connection string 'PostDbContextConnection' not found.");
 
             // Add services to the container.
+            builder.Services.AddRazorPages();
+            builder.Services.AddControllersWithViews();            
             builder.Services.AddDbContext<PostDbContext>();
+
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PostDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>()       
+                .AddRoles<IdentityRole>()                             
+                .AddEntityFrameworkStores<Data.PostDbContext>();
+
             builder.Services.AddTransient<IPostService, EFPostService>();
+            builder.Services.AddMemoryCache();                        
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
             //builder.Services.AddSingleton<IPostService, MemoryPostService>();         
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
@@ -34,7 +47,11 @@ namespace Labolatorium_3_v2
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            
+            app.UseAuthentication();                                 
+            app.UseAuthorization();                                  
+            app.UseSession();                                         
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

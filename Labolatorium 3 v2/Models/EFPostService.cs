@@ -40,7 +40,7 @@ namespace Labolatorium_3_v2.Models
 
         public List<UserEntity> FindAllUsersForVieModel()
         {
-            return _context.Users.ToList();
+            return _context.UsersforPost.ToList();
         }
 
         public Post? FindById(int id)

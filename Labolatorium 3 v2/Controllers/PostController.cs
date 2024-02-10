@@ -1,7 +1,9 @@
 ﻿using Labolatorium_3_v2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Labolatorium_3_v2.Controllers
 {
@@ -16,6 +18,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CreatePost()
         {
             Post model = new Post();
@@ -31,6 +34,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Post model)
         {
             if (ModelState.IsValid)
@@ -46,12 +50,18 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult EditPost(int id)
         { 
 
             if (_postService.FindById(id) is not null)
             {
-                return View(_postService.FindById(id));
+                Post model = _postService.FindById(id);
+                model.Users = _postService
+                    .FindAllUsersForVieModel()
+                    .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Login })
+                    .ToList();
+                return View(model);
             }
             else
             {
@@ -60,6 +70,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult EditPost(Post posts)
         {
 
@@ -75,6 +86,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
 
@@ -89,6 +101,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Details()
         {
             if(ModelState.IsValid)
@@ -103,6 +116,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
 
@@ -117,6 +131,7 @@ namespace Labolatorium_3_v2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(Post posts)
         {
             _postService.Delete(posts.Id);
